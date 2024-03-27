@@ -24,13 +24,13 @@ void CreateList(tagList& l) {
 
 tagNode* CreateNode(const string& ma, const string& ten, float gia, int sl, const string& nxb, const string& tacgia) {
     tagNode* p = new tagNode;
-    p->MaSach = ma;
-    p->TenSach = ten;
-    p->DonGia = gia;
-    p->SL = sl;
-    p->NXB = nxb;
-    p->TenTG = tacgia;
-    p->pNext = nullptr;
+    p -> MaSach = ma;
+    p -> TenSach = ten;
+    p -> DonGia = gia;
+    p -> SL = sl;
+    p -> NXB = nxb;
+    p -> TenTG = tacgia;
+    p -> pNext = nullptr;
     return p;
 }
 
@@ -39,7 +39,7 @@ void AddHead(tagList& l, tagNode* node) {
         l.pHead = node;
         l.pTail = node;
     } else {
-        node->pNext = l.pHead;
+        node -> pNext = l.pHead;
         l.pHead = node;
     }
 }
@@ -49,7 +49,7 @@ void AddTail(tagList& l, tagNode* node) {
         l.pHead = node;
         l.pTail = node;
     } else {
-        l.pTail->pNext = node;
+        l.pTail -> pNext = node;
         l.pTail = node;
     }
 }
@@ -59,9 +59,9 @@ void DisplayBooks(tagList& l) {
     tagNode* temp = l.pHead;
     int i = 1;
     while (temp != nullptr) {
-        cout << i << ". Mã sách: " << temp->MaSach << " | Tên sách: " << temp->TenSach
-             << " | Giá: " << temp->DonGia << " | Số lượng: " << temp->SL << " | Tác giả: " << temp->TenTG << " | NXB: " << temp->NXB << endl;
-        temp = temp->pNext;
+        cout << i << ". Mã sách: " << temp -> MaSach << " | Tên sách: " << temp -> TenSach
+             << " | Giá: " << temp -> DonGia << " | Số lượng: " << temp -> SL << " | Tác giả: " << temp -> TenTG << " | NXB: " << temp -> NXB << endl;
+        temp = temp -> pNext;
         i++;
     }
 }
@@ -72,10 +72,10 @@ void DisplayBooksByAuthor(tagList& l, const string& authorName) {
     bool found = false;
     int i = 1;
     while (temp != nullptr) {
-        if (temp->TenTG == authorName) {
+        if (temp -> TenTG == authorName) {
             found = true;
-            cout << i << ". Mã sách: " << temp->MaSach << " | Tên sách: " << temp->TenSach
-                 << " | Giá: " << temp->DonGia << " | Số lượng: " << temp->SL << " | NXB: " << temp->NXB << endl;
+            cout << i << ". Mã sách: " << temp -> MaSach << " | Tên sách: " << temp -> TenSach
+                 << " | Giá: " << temp -> DonGia << " | Số lượng: " << temp -> SL << " | NXB: " << temp -> NXB << endl;
             i++;
         }
         temp = temp->pNext;
@@ -86,46 +86,40 @@ void DisplayBooksByAuthor(tagList& l, const string& authorName) {
 }
 
 void SortBooksByQuantity(tagList& l) {
-    if (l.pHead == nullptr || l.pHead->pNext == nullptr) {
+    if (l.pHead == nullptr || l.pHead -> pNext == nullptr) {
         return;
     }
-
     bool swapped;
     tagNode *ptr1, *lptr = nullptr;
-
     do {
         swapped = false;
         ptr1 = l.pHead;
-
-        while (ptr1->pNext != lptr) {
-            if (ptr1->SL > ptr1->pNext->SL) {
-                swap(ptr1, ptr1->pNext);
+        while (ptr1 -> pNext != lptr) {
+            if (ptr1 -> SL > ptr1 -> pNext -> SL) {
+                swap(ptr1, ptr1 -> pNext);
                 swapped = true;
             }
-            ptr1 = ptr1->pNext;
+            ptr1 = ptr1 -> pNext;
         }
         lptr = ptr1;
     } while (swapped);
 }
 
 void SortBooksByPriceDescending(tagList& l) {
-    if (l.pHead == nullptr || l.pHead->pNext == nullptr) {
+    if (l.pHead == nullptr || l.pHead -> pNext == nullptr) {
         return;
     }
-
     bool swapped;
     tagNode *ptr1, *lptr = nullptr;
-
     do {
         swapped = false;
         ptr1 = l.pHead;
-
-        while (ptr1->pNext != lptr) {
-            if (ptr1->DonGia < ptr1->pNext->DonGia) {
-                swap(ptr1, ptr1->pNext);
+        while (ptr1 -> pNext != lptr) {
+            if (ptr1 -> DonGia < ptr1 -> pNext -> DonGia) {
+                swap(ptr1, ptr1 -> pNext);
                 swapped = true;
             }
-            ptr1 = ptr1->pNext;
+            ptr1 = ptr1 -> pNext;
         }
         lptr = ptr1;
     } while (swapped);
@@ -135,10 +129,10 @@ void CalculateTotalPriceByPublisher(tagList& l, const string& publisherName) {
     int total = 0;
     tagNode* temp = l.pHead;
     while (temp != nullptr) {
-        if (temp->NXB == publisherName) {
-            total += temp->DonGia * temp->SL;
+        if (temp -> NXB == publisherName) {
+            total += temp -> DonGia * temp -> SL;
         }
-        temp = temp->pNext;
+        temp = temp -> pNext;
     }
     cout << "Tổng số tiền nhà xuất bản " << publisherName << " xuất bản là: " << total << endl;
 }
@@ -163,7 +157,7 @@ int main() {
         Menu();
         cout << "Hãy nhập lựa chọn của bạn: ";
         cin >> choice;
-        cin.ignore(); // consume newline
+        cin.ignore();
         switch (choice) {
             case 1: {
                 string ma, ten, tacgia, nxb;
