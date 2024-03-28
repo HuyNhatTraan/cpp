@@ -11,6 +11,13 @@ private:
     vector<int> SL;
     vector<string> PhongHoc;
 public:
+    template<typename T> // Đặt template để swap nhanh
+    void swapNe(T& a, T& b) {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
+
     void nhapThongTin(){
         string ma, ten, phong;
         int n, sl;
@@ -96,6 +103,24 @@ public:
         }
     }
 
+    void sapXepCaHocTangDan(){
+        int min_idx;
+        for (int i = 0; i < MaHP.size() - 1; i++) { 
+            min_idx = i; 
+            for (int j = i + 1; j < MaHP.size(); j++) { 
+                if (MaHP[j] < MaHP[min_idx]) 
+                    min_idx = j; 
+            } 
+            if (min_idx != i) 
+                swapNe(MaHP[min_idx], MaHP[i]);
+                swapNe(TenHP[min_idx], TenHP[i]);
+                swapNe(PhongHoc[min_idx], PhongHoc[i]);
+                swapNe(SL[min_idx], SL[i]);
+        } 
+        cout << "Sau khi sort: " << endl;
+        xuatThongTin();
+    }
+
 };
 
 void Menu() {
@@ -105,7 +130,8 @@ void Menu() {
     cout << "3. Tim kiem khi biet ma hoc phan." << endl;
     cout << "4. Tim kiem khi biet ten hoc phan." << endl;
     cout << "5. In ra cac ca hoc khi biet phog hoc." << endl;
-    cout << "6. Thoát khỏi menu!" << endl;
+    cout << "6. Sap xep ca hoc theo thu tu tang dan." << endl;
+    cout << "7. Thoát khỏi menu!" << endl;
     cout << "============================================" << endl;
 }
 
@@ -133,6 +159,9 @@ int main() {
             CTH.inRaKhiBietPH();
             break;
         case 6:
+            CTH.sapXepCaHocTangDan();
+            break;
+        case 7:
             cout << "Thoat khoi menu!." << endl;
             break;
         default:
