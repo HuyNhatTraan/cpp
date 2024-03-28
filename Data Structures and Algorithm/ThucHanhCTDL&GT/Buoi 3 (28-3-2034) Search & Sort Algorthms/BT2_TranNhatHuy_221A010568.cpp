@@ -24,7 +24,7 @@ public:
         cout << "Hay nhap so lop thuc hanh ban muon them vao: "; cin >> n;
         cin.ignore();
         for (int i = 0; i < n; i++) {
-            cout << "Nhap thong tin lop hoc phan: " << endl;
+            cout << "Nhap thong tin lop hoc phan thu " << i + 1 << ": " << endl;
             cout << "Hay nhap ma lop hoc phan: "; 
             getline(cin, ma);
             MaHP.push_back(ma);
