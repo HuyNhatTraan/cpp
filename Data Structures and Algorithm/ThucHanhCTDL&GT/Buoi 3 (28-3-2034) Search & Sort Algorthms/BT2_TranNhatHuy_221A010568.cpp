@@ -23,19 +23,21 @@ public:
         int n, sl;
         cout << "Hay nhap so lop thuc hanh ban muon them vao: "; cin >> n;
         cin.ignore();
-        cout << "Nhap thong tin lop hoc phan: " << endl;
-        cout << "Hay nhap ma lop hoc phan: "; 
-        getline(cin, ma);
-        MaHP.push_back(ma);
-        cout << "Hay nhap ten lop hoc phan: ";
-        getline(cin, ten);
-        TenHP.push_back(ten);
-        cout << "Hay nhap so sinh vien: "; cin >> sl;
-        SL.push_back(sl);
-        cin.ignore();
-        cout << "Hay nhap phong hoc: ";
-        getline(cin, phong);
-        PhongHoc.push_back(phong);
+        for (int i = 0; i < n; i++) {
+            cout << "Nhap thong tin lop hoc phan: " << endl;
+            cout << "Hay nhap ma lop hoc phan: "; 
+            getline(cin, ma);
+            MaHP.push_back(ma);
+            cout << "Hay nhap ten lop hoc phan: ";
+            getline(cin, ten);
+            TenHP.push_back(ten);
+            cout << "Hay nhap so sinh vien: "; cin >> sl;
+            SL.push_back(sl);
+            cin.ignore();
+            cout << "Hay nhap phong hoc: ";
+            getline(cin, phong);
+            PhongHoc.push_back(phong);
+        }
     }
 
     void xuatThongTin() {
@@ -168,7 +170,6 @@ int main() {
             cout << "Nhap sai roi! Ban vui long nhap lai." << endl;
             break;
         }
-    } while (choices != 8);
-    
+    } while (choices != 7);
     return 0;
 }
