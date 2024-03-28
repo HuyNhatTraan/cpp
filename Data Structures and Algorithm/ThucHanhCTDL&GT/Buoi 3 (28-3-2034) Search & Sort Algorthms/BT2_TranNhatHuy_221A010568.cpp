@@ -34,7 +34,7 @@ public:
     void xuatThongTin() {
         cout << "Thong tin cac ca hoc: " << endl;
         for (int i = 0; i < MaHP.size(); i++) {
-            cout << i + 1 << "MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
+            cout << i + 1 << ". MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
             << " | Phong: " << PhongHoc[i] << endl;
         }
     }
@@ -43,12 +43,13 @@ public:
         string key;
         bool daTimThay = false;
         cout << "Hay nhap MaHP ma ban muon tim kiem: ";
+        cin.ignore();
         getline(cin, key);
         for (int i = 0; i < MaHP.size(); i++) {
             if (MaHP[i] == key) {
                 daTimThay = true;
                 cout << "Da tim thay thong tin hoc phan nay: " << endl;
-                cout << i + 1 << "MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
+                cout << i + 1 << ". MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
             << " | Phong: " << PhongHoc[i] << endl;
             }
             if (!daTimThay) {
@@ -61,12 +62,13 @@ public:
         string key;
         bool daTimThay = false;
         cout << "Hay nhap TenHP ma ban muon tim kiem: ";
+        cin.ignore();
         getline(cin, key);
         for (int i = 0; i < MaHP.size(); i++) {
             if (TenHP[i] == key) {
                 daTimThay = true;
                 cout << "Da tim thay thong tin hoc phan nay: " << endl;
-                cout << i + 1 << "MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
+                cout << i + 1 << ". MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
             << " | Phong: " << PhongHoc[i] << endl;
             }
             if (!daTimThay) {
@@ -79,12 +81,13 @@ public:
         string key;
         bool daTimThay = false;
         cout << "Hay nhap phong hoc ma ban muon tim kiem: ";
+        cin.ignore();
         getline(cin, key);
         for (int i = 0; i < MaHP.size(); i++) {
             if (PhongHoc[i] == key) {
                 daTimThay = true;
                 cout << "Da tim thay thong tin hoc phan nay: " << endl;
-                cout << i + 1 << "MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
+                cout << i + 1 << ". MaHP: " << MaHP[i] << " | TenHP: " << TenHP[i] << " | Sinh vien: " << SL[i]
             << " | Phong: " << PhongHoc[i] << endl;
             }
             if (!daTimThay) {
