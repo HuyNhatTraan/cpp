@@ -3,14 +3,14 @@
 #include <ctime>
 #include <stdlib.h>
 using namespace std;
-
 const int MAX = 1000;
 
-void swap(int &a, int &b){
-    int temp = a;
-    a = b;
-    b = temp;
-}
+template<typename T> // Đặt template để swap nhanh
+void swapNe(T& a, T& b) {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
 
 void random(int arr[], int &n){ // Hàm random mảng 
     cout << "Hay nhap so phan tu ban muon random: "; cin >> n;
@@ -48,7 +48,7 @@ void SelectionSort(int arr[], int n){
             if (arr[j] < arr[min_idx])
                 min_idx = j;
         }
-        swap(arr[i], arr[min_idx]);
+        swapNe(arr[i], arr[min_idx]);
     }
     cout << "Mang sau khi da sort la (Chon truc tiep)-> ";
     for (int i = 0; i < n; i++)
