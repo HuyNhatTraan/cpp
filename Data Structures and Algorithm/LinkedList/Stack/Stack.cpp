@@ -1,145 +1,98 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-struct tagNode {
-	string MaSP, TenSP, NhaSanXuat, NoiSanXuat;
-	int Ngay, Thang, Nam, SoNgaySuDung, SL;
-	float DonGia;
-	tagNode* pNext;
+struct Node {
+    int data;
+    Node *next;
 };
 
 struct Stack {
-	tagNode* pTop;
+    Node *head;
 };
 
-void CreateStack(Stack& s) {
-	s.pTop = NULL;
+void CreateStack(Stack &s) {
+    s.head = NULL;
 }
 
-tagNode* CreateNode(const string ma, const string ten, const int sl, const int ngay, const int thang, const int nam, const int ngaysudung, const string nsx, const string nhasx, const float gia) {
-	tagNode* p = new tagNode;
-	p -> MaSP = ma;
-	p -> TenSP = ten;
-	p -> DonGia = gia;
-	p -> SL = sl;
-	p -> Ngay = ngay;
-	p -> Thang = thang;
-	p -> Nam = nam;
-	p -> NhaSanXuat = nhasx;
-	p -> NoiSanXuat = nsx;
-	p -> pNext = NULL;
-	return p;
+Node *CreateNode(int init) {
+    Node *node = new Node;
+    node->data = init;
+    node->next = NULL;
+    return node;
 }
 
-void Push(Stack& s, tagNode *node) {
-	if (s.pTop == NULL) {
-		s.pTop = node;
-	}
-	else {
-		node->pNext = s.pTop;
-		s.pTop = node;
-	}
+int IsEmpty(Stack s) {
+    if (s.head == NULL)
+        return 1;
+    return 0;
 }
 
-void nhapThongTinSP(Stack &s) {
-	int n, sl, ngay, thang, nam, ngaysudung;
-	string ma, ten, nhasx, nsx;
-	float giatien;
-	cout << "Hãy nhập số lượng SP bạn muốn nhập: "; cin >> n;
-	for (int i = 0; i < n; i++) {
-		cout << "Hãy nhập sản phẩm thứ " << i + 1 << ": " << endl;
-		cout << "Hãy nhập Mã SP:";
-		cin.ignore();
-		getline(cin, ma);
-		cout << "Hãy nhập Tên SP:"; 
-		getline(cin, ten);
-		cout << "Hãy nhập Giá SP:"; 
-		cin >> giatien; 
-		cout << "Hãy nhập số lượng sp:";
-		cin >> sl;
-		cout << "Hãy nhập ngày sx: "; cin >> ngay;
-		cout << "Hãy nhập tháng sx: "; cin >> thang;
-		cout << "Hãy nhập năm sx: "; cin >> nam;
-		cout << "Hãy nhập số ngày đã sử dụng: "; cin >> ngaysudung;
-		cout << "Hãy nhập nhà sx: "; cin.ignore();
-		getline(cin, nhasx);
-		cout << "Hãy nhập nơi sx: ";
-		getline(cin, nsx);
-
-		tagNode* node = CreateNode(ma, ten, sl, ngay, thang, nam, ngaysudung, nsx, nhasx, giatien);
-		Push(s, node);
-	}
+void Push(Stack &s, Node *node) {
+    if (IsEmpty(s))
+        s.head = node;
+    else
+    {
+        node->next = s.head;
+        s.head = node;
+    }
 }
 
-void xuatThongTinSP(Stack s) {
-	if (s.pTop != NULL) {
-		cout << "Danh sách các sản phẩm đang có: " << endl;
-		int i = 1;
-		tagNode* node = s.pTop;
-		while (node != NULL) {
-			cout << i << ". Mã SP: " << node -> MaSP << " | Tên SP: " << node -> TenSP << " | Giá Tiền: " << node -> DonGia
-				<< " | Số Lượng: " << node -> SL << " | Ngày SX: " << node -> Ngay << "/" << node -> Thang << "/" << node->Nam
-				<< " | Số ngày đã sử dụng: " << node -> SoNgaySuDung << " | Nhà SX: " << node -> NhaSanXuat << " | Nơi SX: " << node -> NoiSanXuat << endl;
-			node = node -> pNext;
-			i++;
-		}
-	}
-	else {
-		cout << "Bạn chưa nhập thông tin vào! Xin hãy thử lại." << endl;
-	}
+int Pop(Stack &s) {
+    if (IsEmpty(s))
+        return 0;
+    Node *node = s.head;
+    int data = node->data;
+    s.head = node->next;
+    delete node;
+    return data;
+}
+ 
+int Top(Stack s) {
+    if (IsEmpty(s))
+        return 0;
+    return s.head->data;
 }
 
-void FreeStack(Stack& s) {
-	tagNode* node = s.pTop;
-	bool daGiaiPhong = false;
-	while (s.pTop != NULL) {
-		tagNode* nextNode = node->pNext;
-		delete node;
-		node = nextNode;
-		daGiaiPhong = true;
-	} 
-	if (daGiaiPhong = true) {
-		cout << "Giải phóng bộ nhớ thành công!" << endl;
-	}
-	else {
-		cout << "Giải phóng bộ nhớ không thành công." << endl;
-	}
+void DestroyStack(Stack &s) {
+    Node *node = s.head;
+    while (s.head != NULL)
+    {
+        s.head = node->next;
+        delete node;
+        node = s.head;
+    }
 }
 
-void Menu() {
-	cout << "========================================" << endl;
-	cout << "1. Nhập thông tin cho SP." << endl;
-	cout << "2. Xuất thông tin các SP." << endl;
-	cout << "3. Giải phóng bộ nhớ." << endl;
-	cout << "4. Thoát khỏi Menu." << endl;
-	cout << "========================================" << endl;
+void PrintStack(Stack s) {
+    Node *node = s.head;
+    while (node != NULL)
+    {
+        cout << node->data << ' ';
+        node = node->next;
+    }
 }
 
 int main() {
-	Stack stack;
-	CreateStack(stack);
-	int choices;
-	do {
-		Menu();
-		cout << "Hãy nhập lựa chọn của bạn: "; cin >> choices;
-		switch (choices) {
-			case 1: 
-				nhapThongTinSP(stack);
-				break;
-			case 2:
-				xuatThongTinSP(stack);
-				break;
-			case 3:
-				FreeStack(stack);
-				break;
-			case 4:
-				cout << "Thoát khỏi menu thành công!." << endl;
-				break;
-			default:
-				cout << "Bạn nhập sai rồi! Vui lòng nhâp lại." << endl;
-				break;
-		}
-	} while (choices != 4);
-	return 0;
+    Stack stack;
+    CreateStack(stack);
+
+    Node *node;
+    for (int i = 0; i < 10; i++)
+    {
+        node = CreateNode(i + 1);
+        Push(stack, node);
+    }
+    PrintStack(stack); // 10 9 8 7 6 5 4 3 2 1
+    cout << endl;
+
+    cout << Pop(stack) << endl; // 10
+    PrintStack(stack); // 9 8 7 6 5 4 3 2 1
+    cout << endl;
+
+    cout << Top(stack) << endl; // 9
+    PrintStack(stack); // 9 8 7 6 5 4 3 2 1
+
+    DestroyStack(stack);
+
+    return 0;
 }
